@@ -1,0 +1,16 @@
+services:
+  webserver:
+    image: 'nginx:alpine'
+    working_dir: /application
+    volumes:
+      - '.:/application'
+      - './docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
+    ports:
+      - '56000:80'
+
+  php-fpm:
+    image: allanrodriguesmachado/webdev
+    working_dir: /application
+    volumes:
+      - '.:/application'
+      - './docker/php-fpm/php-ini-overrides.ini:/etc/php/8.3/fpm/conf.d/99-overrides.ini'
